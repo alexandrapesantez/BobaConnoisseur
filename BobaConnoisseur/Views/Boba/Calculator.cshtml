@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hourly Rate Calculator</title>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#calculate-btn').click(function () {//This attaches a click event handler to the button with id "calculate-btn"
+                var hours = parseFloat($('#hours').val());// retrieves the value entered in the input field with id "hours" and converts it to a number 
+                var hourlyRate = parseFloat($('#hourlyrate').val().replace('$', '')); 
+                if (isNaN(hours) || hours <= 0) {
+                    $('#total').text('Please enter a valid positive number for hours.');// checks if the value of "hours" is not a number or is less than or equal to 0
+                } else {
+                    var total = hours * hourlyRate;//calculates the total cost by multiplying the number of hours by the hourly rate
+                    $('#total').text('Total cost: $' + total.toFixed(2));// displays the total cost with two decimal places
+                }
+            });
+        });
+    </script>
+    <!--styles for footer and total cost output textbox-->
+    <style>
+        footer {
+            text-align: center;
+            padding: 3px;
+            background-color: beige;
+            color: black;
+        }
+
+        #textbox {
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin-top: 10px; 
+            width: 200px; 
+            background-color: #f9f9f9; 
+        }
+        }
+    </style>
+</head>
+<!--created a header, subheader, and created input boxe for the user to input number of hours and created a noneditable box to output my services fee 
+and created an output box for total cost
+-->
+<body>
+    <h1>Alex's Boba Reviewing Service Calculator</h1>
+    <br/>
+    <h3>Hourly Rate Calculator</h3>
+    <div>
+        <label for="hours">Enter the number of hours:</label>
+        <input type="number" id="hours" min="0">
+    </div>
+    <br />
+    <div>
+        <label>Hourly rate:</label>
+        <input id="hourlyrate" type="text" value='$100.00' readonly>
+    </div>
+    <br/>
+    <div>
+        <button id="calculate-btn">Calculate Total</button>
+    </div>
+    <div id="textbox">
+        <span id="total"></span>
+    </div>
+</body>
+</html>
